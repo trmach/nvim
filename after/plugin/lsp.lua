@@ -7,7 +7,6 @@ end)
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'tsserver',
         'eslint',
         'rust_analyzer'
     },
@@ -16,13 +15,21 @@ require('mason-lspconfig').setup({
     }
 })
 
-require('lspconfig')['hls'].setup{
-   filetypes = { 'haskell', 'lhaskell', 'cabal' },
-   cmd = { 'haskell-language-server-wrapper', '--lsp' },
-}
-
 lsp_zero.preset('recommended')
 lsp_zero.setup()
+
+require'lspconfig'.rust_analyzer.setup{
+  settings = {
+    ['rust-analyzer'] = {
+      procMacro = {
+        enable = true;
+      },
+      diagnostics = {
+        disabled = {"unresolved-proc-macro"};
+      }
+    }
+  }
+}
 
 
 --lsp_zero.on_attach(function(client, bufnr)
