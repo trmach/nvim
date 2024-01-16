@@ -24,8 +24,21 @@ require'lspconfig'.rust_analyzer.setup{
       procMacro = {
         enable = true;
       },
+      assist = {
+        importEnforceGranularity = true,
+      },
+      cargo = {
+        allFeatures = true,
+      },
+      checkOnSave = {
+        command = 'clippy',
+      },
       diagnostics = {
-        disabled = {"unresolved-proc-macro"};
+        enable = true,
+        experimental = {
+          enable = true,
+        },
+        disabled = {"unresolved-proc-macro"},
       }
     }
   }
